@@ -15,8 +15,8 @@ deploy:
 after_success:
   - rm .gitignore && git add . && git commit -m 'deploy'
   - eval "$(ssh-agent -s)" #start the ssh agent
-  - chmod 600 .travis/travis_deploy.pub # this key should have push access
-  - ssh-add .travis/travis_deploy.pub
+  - chmod 600 travis_deploy.pub # this key should have push access
+  - ssh-add travis_deploy.pub # .travis/
   - git remote add deploy root@206.189.124.103/var/repo/site.git
   - git push deploy
 

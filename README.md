@@ -1,2 +1,3 @@
 # ptjob-expressjs
-Part-Time Job
+A Website for Part-Time Jobs
+

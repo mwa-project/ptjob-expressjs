@@ -34,3 +34,4 @@ testem.log
 
 package-lock.json
 config.json
+.DS_Store

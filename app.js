@@ -5,6 +5,14 @@ var cookieParser = require('cookie-parser');
 var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
 
+var CONFIG = require('./config.json');
+var dbPort = CONFIG.dbPort;
+var dbHost = CONFIG.dbHost;
+var dbUser = CONFIG.dbUser;
+var dbPwd = CONFIG.dbPwd;
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://" + dbUser + ":" + dbPwd + "@" + dbHost + ":" + dbPort + "/pt-job-db");
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -39,5 +47,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+app.listen(3001, () => {
+  console.log('listening on 3001...')
+});
 module.exports = app;

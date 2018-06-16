@@ -13,7 +13,7 @@ deploy:
   skip_cleanup: true
 
 after_success:
-  - git add . && git commit -m 'deploy'
+  - rm .gitignore && git add . && git commit -m 'deploy'
   - eval "$(ssh-agent -s)" #start the ssh agent
   - chmod 600 .travis/travis_deploy.pub # this key should have push access
   - ssh-add .travis/travis_deploy.pub

@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  # - "iojs"
+  - "iojs"
   - "7"
 before_install:
   - openssl aes-256-cbc -K $encrypted_33c2a12ca10a_key -iv $encrypted_33c2a12ca10a_iv -in travis_deploy.pub.enc -out travis_deploy.pub -d
@@ -11,6 +11,8 @@ cache:
 
 deploy:
   skip_cleanup: true
+  on:
+    all_branches: true
 
 after_success:
   - rm .gitignore && git add . && git commit -m 'deploy'

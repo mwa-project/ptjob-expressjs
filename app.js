@@ -17,6 +17,7 @@ mongoose.connect("mongodb://" + dbUser + ":" + dbPwd + "@" + dbHost + ":" + dbPo
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var sessionsRouter = require('./routes/sessions');
+var tokenValidator = require('./middlewares/tokenvalidator');
 
 var app = express();
 
@@ -31,6 +32,8 @@ app.use(cookieParser());
 app.use(bodyParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(tokenValidator);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

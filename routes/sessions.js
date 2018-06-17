@@ -12,8 +12,6 @@ router.post('/', (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     User.authenticate(email, password, (err, user) => {
-        // console.log('err:' + err);
-        // console.log('user: ' + user);
         if (err) {
             return res.json({
                 "error": err
@@ -28,11 +26,6 @@ router.post('/', (req, res, next) => {
             "token": token
         })
     });
-});
-
-// DELETE /session destroys session and redirect to /
-router.delete('/', (req, res, next) => {
-
 });
 
 module.exports = router;

@@ -35,13 +35,13 @@ describe('Test User model', () => {
         });
       });
 
-      it('should delete a user with user_name', (done) => {
-        User.findOneAndDelete({ user_name: 'carlyang2'}, (err, user) => {
-            expect(err).to.be.null;
-            expect(user).to.have.property('email', 'carlyang@gmail.com');
-            done();
-        });
-      });
+    //   it('should delete a user with user_name', (done) => {
+    //     User.findOneAndDelete({ user_name: 'carlyang2'}, (err, user) => {
+    //         expect(err).to.be.null;
+    //         expect(user).to.have.property('email', 'carlyang@gmail.com');
+    //         done();
+    //     });
+    //   });
 
       it('should not delete any use with a wrong user_name', (done) => {
         User.findOneAndDelete( { user_name: 'carlyangwrongname' }, (err, user) => {

@@ -19,9 +19,9 @@ describe('POST /users', () => {
     });
 });
 
-describe('DELETE /:username', () => {
-    it('delete with username', done => {
-        supertest.agent(app).delete('/users/carlyang')
-        .expect(200, done);
-    });
-});
+// describe('DELETE /:username', () => {
+//     it('delete with username', done => {
+//         supertest.agent(app).delete('/users/carlyang')
+//         .expect(200, done);
+//     });
+// });

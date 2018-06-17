@@ -8,7 +8,7 @@ before_install:
 
 before_script:
   - npm run build
-  
+
 cache:
   directories:
     - node_modules
@@ -17,7 +17,6 @@ addons:
   ssh_known_hosts: 138.197.105.128
 
 after_success:
-  # - rm .gitignore && git add . && git commit -m 'deploy'
   - eval "$(ssh-agent -s)" #start the ssh agent
   - chmod 600 travis_deploy.pem # this key should have push access
   - ssh-add travis_deploy.pem

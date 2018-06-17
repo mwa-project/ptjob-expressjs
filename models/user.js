@@ -20,19 +20,19 @@ var userSchema = new mongoose.Schema({
         , city: String}]
     , hobbies: [String]
     , achievements:[String]
-    , ratings: [{job_id: ObjectId
+    , ratings: [{job_id: mongoose.mongo.ObjectId
         , job_name: String
         , rating_type: Boolean
         , rating_value: Number
         , comment: String}]
-    , job_applications: [{job_id: ObjectId
+    , job_applications: [{job_id: mongoose.mongo.ObjectId
         , job_name: String
         , date_posted: Date
         , date_applied: Date
         , status: String
         , start_date: Date
-        , end_date: Date }] 
-    , job_posts: [{job_id: ObjectId
+        , end_date: Date }]
+    , job_posts: [{job_id: mongoose.mongo.ObjectId
         , job_name: String
         , date_posted: Date
         , date_applied: Date
@@ -41,7 +41,7 @@ var userSchema = new mongoose.Schema({
         , end_date: Date }]
     , job_subscription:{categories: []
         , salary: {from: Number, to: Number}
-        , distance: Number}        
+        , distance: Number}
 
 });
 
@@ -54,7 +54,7 @@ userSchema.methods.fullName = function(){
     return this.first_name + ' '+ this.last_name;
 }
 
-//statics: 
+//statics:
 userSchema.static.findByName = function(name, cb){
     return this.find({user_name: name}, cb);
 }

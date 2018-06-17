@@ -31,7 +31,7 @@ router.post('/', function (req, res, next) {
         , zipcode: req.body.zipcode
         , type: 'Points'
         , coordinates:[req.body.longitude, req.body.latitude]}
-    , requirements: req.body.requirements
+    , requirements: req.body.requirements //still not sure the syntax
     , period: {start_date: req.body.start_date, end_date: req.body.end_date}
     , salary_range: {from: req.body.salary_from, to: req.body.salary_to}
     , created_at: new Date()

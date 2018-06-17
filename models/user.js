@@ -20,19 +20,19 @@ var userSchema = new mongoose.Schema({
         , city: String}]
     , hobbies: [String]
     , achievements:[String]
-    , ratings: [{job_id: mongoose.mongo.ObjectId
+    , ratings: [{job_id: mongoose.Schema.Types.ObjectId
         , job_name: String
         , rating_type: Boolean
         , rating_value: Number
         , comment: String}]
-    , job_applications: [{job_id: mongoose.mongo.ObjectId
+    , job_applications: [{job_id: mongoose.Schema.Types.ObjectId
         , job_name: String
         , date_posted: Date
         , date_applied: Date
         , status: String
         , start_date: Date
         , end_date: Date }]
-    , job_posts: [{job_id: mongoose.mongo.ObjectId
+    , job_posts: [{job_id: mongoose.Schema.Types.ObjectId
         , job_name: String
         , date_posted: Date
         , date_applied: Date

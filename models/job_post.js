@@ -12,8 +12,8 @@ var jobPostSchema = new mongoose.Schema({
     , created_at: Date
     , updated_at: Date
     , deleted_at: Date
-    , created_by: {user_id: mongoose.mongo.ObjectId, full_name: String}
-    , applicants: [{user_id: mongoose.mongo.ObjectId
+    , created_by: {user_id: mongoose.Schema.Types.ObjectId, full_name: String}
+    , applicants: [{user_id: mongoose.Schema.Types.ObjectId
         , full_name: String
         , submission_date: Date
         , status: String}]

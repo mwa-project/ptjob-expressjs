@@ -3,7 +3,9 @@ var mongoose = require('mongoose');
 var jobPostSchema = new mongoose.Schema({
     category: String
     , description: String
-    , location: {city: String
+    , location: {state: String
+        , city: String
+        , zipcode: String
         , type: String
         , coordinates:[Number, Number]}
     , requirements: [String]

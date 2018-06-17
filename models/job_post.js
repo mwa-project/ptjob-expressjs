@@ -9,7 +9,7 @@ var jobPostSchema = new mongoose.Schema({
         , type: String
         , coordinates:[Number, Number]}
     , requirements: [String]
-    , period: {startDate: Date, endDate: Date}
+    , period: {start_date: Date, end_date: Date}
     , salary_range: {from: Number, to: Number}
     , created_at: Date
     , updated_at: Date

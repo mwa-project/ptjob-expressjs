@@ -63,7 +63,15 @@ userSchema.pre('save', function(next){
     var currentDate = new Date();
     this.updated_at = currentDate;
     if(!this.created_at)this.created_at = currentDate;
-    next();
+    
+    // hashing a password before saving it to the database
+    bcrypt.hash(user.password, 10, function (err, hash){
+        if (err) {
+          return next(err);
+        }
+        user.password = hash;
+        next();
+    })
 });
 
 //query helpers
@@ -80,5 +88,25 @@ userSchema.virtual('fullName')
     this.first_name = v.substr(0, v.indexOf(' '));
     this.last_name = v.substr(v.indexOf(' ')+1);
 })
+
+userSchema.statics.authenticate = function (email, password, callback) {
+    User.findOne({ email: email })
+      .exec(function (err, user) {
+        if (err) {
+          return callback(err)
+        } else if (!user) {
+          var err = new Error('User not found.');
+          err.status = 401;
+          return callback(err);
+        }
+        bcrypt.compare(password, user.password, function (err, result) {
+          if (result === true) {
+            return callback(null, user);
+          } else {
+            return callback();
+          }
+        })
+      });
+  }
 
 module.exports = mongoose.model('User', userSchema);

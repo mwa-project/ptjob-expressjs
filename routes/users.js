@@ -15,6 +15,7 @@ router.post('/', function(req, res, next) {
   var carl = new User({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
+    password: req.body.password,
     email: req.body.email
   });
   carl.save(err => {
@@ -34,5 +35,10 @@ router.post('/', function(req, res, next) {
     
   });
 });
+
+// GET  /users/new gets the webpage that has the registration form
+// POST /users records the entered information into database as a new /user/xxx
+// GET  /users/xxx // gets and renders current user data in a profile view
+// POST /users/xxx // updates new information about user
 
 module.exports = router;

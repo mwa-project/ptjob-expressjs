@@ -12,7 +12,9 @@ var userSchema = new mongoose.Schema({
     , updated_at: Date
     , dateOfBirth: Date
     , gender: String
-    , location: {city: String
+    , location: { state: String
+        , city: String
+        , zipcode: String
         , type: String
         , coordinates:[Number, Number]}
        // , coordinates:{type: [Number, Number]}} //titin: it can also work , I think

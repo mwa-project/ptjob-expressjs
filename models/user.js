@@ -50,7 +50,9 @@ var userSchema = new mongoose.Schema({
 userSchema.index({user_name: 1});
 
 //custom methods:
-userSchema.methods.fullName = function(){
+//fix error "Error: You have a method and a property in your schema both named "fullName""
+//give different Name
+userSchema.methods.getFullName = function(){
     return this.first_name + ' '+ this.last_name;
 }
 

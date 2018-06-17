@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   User.find({}, (err, users) => {
     res.json({
       "data": users
@@ -11,20 +11,22 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.post('/', function(req, res, next) {
+/* POST new user */
+router.post('/', function (req, res, next) {
   var carl = new User({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     password: req.body.password,
-    email: req.body.email
+    email: req.body.email,
+    user_name: req.body.user_name
   });
   carl.save(err => {
     if (err) {
-      console.log(err.name);
+      console.log("save error" + err);
       res.send({
         "error": {
           "code": 520,
-          "message": err.name
+          "message": err
         }
       });
     } else {
@@ -32,7 +34,22 @@ router.post('/', function(req, res, next) {
         "data": null
       });
     }
-    
+
+  });
+});
+
+router.delete('/:username', (req, res, next) => {
+  User.findOneAndRemove({ user_name: req.params.username }, (err) => {
+    if (err) {
+      res.json({
+        "error": {
+          "error": 520,
+          "message": err
+        }
+      });
+    } else {
+      res.json({ "data": null });
+    }
   });
 });
 

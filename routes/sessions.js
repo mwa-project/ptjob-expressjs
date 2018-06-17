@@ -11,12 +11,12 @@ router.get('/new', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log(email);
-    console.log(password);
     User.authenticate(email, password, (err, user) => {
+        // console.log('err:' + err);
+        // console.log('user: ' + user);
         if (err) {
-            res.json({
-                "error": err.name
+            return res.json({
+                "error": err
             });
         }
         res.json({

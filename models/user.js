@@ -66,6 +66,7 @@ userSchema.pre('save', function(next){
     if(!this.created_at)this.created_at = currentDate;
     
     // hashing a password before saving it to the database
+    var user = this;
     bcrypt.hash(user.password, 10, function (err, hash){
         if (err) {
           console.log(err);
@@ -82,18 +83,17 @@ userSchema.query.byUserName = function(userName){
 }
 
 //virtuals:
-userSchema.virtual('fullName')
-.get(function(){
-    return this.first_name + ' ' + this.last_name;
-})
-.set(function(v){
-    this.first_name = v.substr(0, v.indexOf(' '));
-    this.last_name = v.substr(v.indexOf(' ')+1);
-})
+// userSchema.virtual('fullName')
+// .get(function(){
+//     return this.first_name + ' ' + this.last_name;
+// })
+// .set(function(v){
+//     this.first_name = v.substr(0, v.indexOf(' '));
+//     this.last_name = v.substr(v.indexOf(' ')+1);
+// })
 
 userSchema.statics.authenticate = function (email, password, callback) {
-    User.findOne({ email: email })
-      .exec(function (err, user) {
+    this.findOne({ email: email }, function (err, user) {
         if (err) {
           return callback(err)
         } else if (!user) {

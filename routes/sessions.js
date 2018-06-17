@@ -19,8 +19,13 @@ router.post('/', (req, res, next) => {
                 "error": err
             });
         }
+        let token;
+        if (user) {
+            token = user.generateToken();
+        }
         res.json({
-            "data": user
+            "data": user,
+            "token": token
         })
     });
 });

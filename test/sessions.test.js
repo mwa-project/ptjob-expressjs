@@ -48,6 +48,37 @@ describe('POST /sessions', () => {
             .end(done);
     });
 
+    it('should return a token if the password is correct', done => {
+        supertest.agent(app)
+            .post('/sessions')
+            .send({
+                email: email,
+                password: password
+            })
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .expect(res => {
+                // console.log(res.body.token.length);
+                expect(res.body.token).to.have.lengthOf(128);
+            })
+            .end(done);
+    });
+
+    it('should not return a token if the password is wrong', done => {
+        supertest.agent(app)
+            .post('/sessions')
+            .send({
+                email: email,
+                password: password + "1"
+            })
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .expect(res => {
+                expect(res.body.token).to.be.undefined;
+            })
+            .end(done);
+    });
+
     it('should not authenticate the user with the wrong password', done => {
         supertest.agent(app)
             .post('/sessions')

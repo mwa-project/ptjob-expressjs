@@ -19,7 +19,6 @@ describe('POST /users', () => {
     });
 });
 
-
 describe('DELETE /:username', () => {
     it('delete with username', done => {
         supertest.agent(app).delete('/users/carlyang')

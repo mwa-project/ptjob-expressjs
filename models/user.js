@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 var userSchema = new mongoose.Schema({
     first_name: String
@@ -111,4 +112,15 @@ userSchema.statics.authenticate = function (email, password, callback) {
       });
   }
 
+userSchema.methods.generateToken = () => {
+    // Signing a token with 1 hour of expiration
+    const secret = 'mwa';
+    return jwt.sign({
+        user_name: this.user_name,
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email,
+        exp: Math.floor(Date.now() / 1000) + (60 * 60)
+    }, secret);
+};
 module.exports = mongoose.model('User', userSchema);

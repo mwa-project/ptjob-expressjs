@@ -4,18 +4,12 @@ var User = require('../models/user');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  // User.find({}, (err, users) => {
-  //   if (err) throw err;
-  //   res.json({
-  //     "data": users
-  //   });
-  // });
 
   req.checkAccess((authenticated, json) => {
     if (!authenticated) {
-    //  return res.unauthorized();
+     return res.unauthorized();
     }
-    console.log(json);
+    // console.log(json);
 
     User.find({}, (err, users) => {
       if (err) throw err;
@@ -29,7 +23,7 @@ router.get('/', function (req, res, next) {
 /* POST new user */
 router.post('/', function (req, res, next) {
 
-    let location = {
+    let location = {  
       city:  req.body.city,
        state : req.body.state,
       zipcode : req.body.zipCode,
@@ -50,7 +44,7 @@ router.post('/', function (req, res, next) {
 
   user.save(err => {
     if (err) {
-      console.log("save error" + err);
+      // console.log("save error" + err);
       res.send({
         "error": {
           "code": 520,

@@ -16,8 +16,8 @@ var userSchema = new mongoose.Schema({
         , city: String
         , zipcode: String
         , type: { type: String }
-         , coordinates:[Number, Number]}
-        //, coordinates:{type: [Number, Number]}
+        //  , coordinates:[Number, Number]}
+        , coordinates: { type: Array, 'default': [0, 0] } }
     //} //titin: it can also work , I think
     , educations: [{school_name: String
         , start_date:Date
@@ -73,7 +73,7 @@ userSchema.pre('save', function(next){
     var user = this;
     bcrypt.hash(user.password, 10, function (err, hash){
         if (err) {
-          console.log(err);
+        //   console.log(err);
           return next(err);
         }
         user.password = hash;

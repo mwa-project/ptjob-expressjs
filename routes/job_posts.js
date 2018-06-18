@@ -32,11 +32,11 @@ router.post('/', function (req, res, next) {
         , type: 'Points'
         , coordinates:[req.body.longitude, req.body.latitude]}
     , requirements: req.body.requirements //still not sure the syntax
-    , period: {start_date: req.body.start_date, end_date: req.body.end_date}
-    , salary_range: {from: req.body.salary_from, to: req.body.salary_to}
+    , period: {start_date: req.body.period_start_date, end_date: req.body.period_end_date}
+    , salary_range: {from: req.body.salary_range_from, to: req.body.salary_range_to}
     , created_at: new Date()
     , updated_at: new Date()
-    , deleted_at: new Date()
+    // , deleted_at: new Date()  // if not marked as deleted , property deleted_at does not exist
     , created_by: {user_id: req.body.created_by, full_name: req.body.full_name}
 
   });

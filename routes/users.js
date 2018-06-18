@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
 
   req.checkAccess((authenticated, json) => {
     if (!authenticated) {
-      return res.unauthorized();
+    //  return res.unauthorized();
     }
     console.log(json);
 
@@ -28,14 +28,27 @@ router.get('/', function (req, res, next) {
 
 /* POST new user */
 router.post('/', function (req, res, next) {
-  var carl = new User({
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
+
+    let location = {
+      city:  req.body.city,
+       state : req.body.state,
+      zipcode : req.body.zipCode,
+      type : 'point',
+      coordinates : [ req.body.longitude, req.body.latitude ]
+    }
+
+    let user = new User({
+    first_name: req.body.firstName,
+    last_name: req.body.lastName,
     password: req.body.password,
     email: req.body.email,
-    user_name: req.body.user_name
+    user_name: req.body.userName,
+    date_of_birth: req.body.dateOfBirth ,
+    location: location
+
   });
-  carl.save(err => {
+
+  user.save(err => {
     if (err) {
       console.log("save error" + err);
       res.send({

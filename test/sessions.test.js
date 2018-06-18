@@ -8,7 +8,7 @@ var should = chai.should();
 describe('test/sessions.test.js', () => {
 
     var password = "123456";
-    var user_name = "carly1";
+    var user_name = "carly12";
 
     before(done => {
         supertest.agent(app)

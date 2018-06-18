@@ -11,8 +11,10 @@ router.get('/new', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const user_name = req.body.user_name;
     const password = req.body.password;
-    // console.log(user_name + ": " + password);
+    console.log(user_name + ": " + password);
     User.authenticate(user_name, password, (err, user) => {
+        console.log(err);
+        console.log(user);
         if (err) {
             return res.json({
                 "error": err

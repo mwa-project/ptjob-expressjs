@@ -10,7 +10,7 @@ var userSchema = new mongoose.Schema({
     , password: { type: String, required: true }
     , created_at: Date
     , updated_at: Date
-    , dateOfBirth: Date
+    , date_of_birth: Date
     , gender: String
     , location: { state: String
         , city: String
@@ -18,9 +18,9 @@ var userSchema = new mongoose.Schema({
         , type: String
         , coordinates:[Number, Number]}
        // , coordinates:{type: [Number, Number]}} //titin: it can also work , I think
-    , educations: [{schoolName: String
-        , startDate:Date
-        , endDate: Date
+    , educations: [{school_name: String
+        , start_date:Date
+        , end_date: Date
         , city: String}]
     , hobbies: [String]
     , achievements:[String]
@@ -31,15 +31,15 @@ var userSchema = new mongoose.Schema({
         , comment: String}]
     , job_applications: [{job_id: mongoose.Schema.Types.ObjectId
         , job_name: String
-        , date_posted: Date
-        , date_applied: Date
+        , posted_date: Date
+        , applied_date: Date
         , status: String
         , start_date: Date
         , end_date: Date }]
     , job_posts: [{job_id: mongoose.Schema.Types.ObjectId
         , job_name: String
-        , date_posted: Date
-        , date_applied: Date
+        , posted_date: Date
+       // , applied_date: Date  //dont have this prop
         , status: String
         , start_date: Date
         , end_date: Date }]

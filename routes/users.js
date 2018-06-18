@@ -4,9 +4,24 @@ var User = require('../models/user');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  User.find({}, (err, users) => {
-    res.json({
-      "data": users
+  // User.find({}, (err, users) => {
+  //   if (err) throw err;
+  //   res.json({
+  //     "data": users
+  //   });
+  // });
+
+  req.checkAccess((authenticated, json) => {
+    if (!authenticated) {
+      return res.unauthorized();
+    }
+    console.log(json);
+
+    User.find({}, (err, users) => {
+      if (err) throw err;
+      res.json({
+        "data": users
+      });
     });
   });
 });

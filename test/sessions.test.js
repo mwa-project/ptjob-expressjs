@@ -5,9 +5,8 @@ var chai = require('chai');
 var expect = chai.expect;
 var should = chai.should();
 
-describe('POST /sessions', () => {
+describe('test/sessions.test.js', () => {
 
-    var email = "carly@gmail.com";
     var password = "123456";
     var user_name = "carly1";
 
@@ -15,7 +14,7 @@ describe('POST /sessions', () => {
         supertest.agent(app)
             .post('/users')
             .send({
-                email: email,
+                email: 'carly@gmail.com',
                 password: password,
                 user_name: user_name,
                 first_name: 'carl',
@@ -25,25 +24,25 @@ describe('POST /sessions', () => {
             .end(done);
     });
 
-    after(done => {
-        supertest.agent(app)
-            .delete('/users/' + user_name)
-            .expect(res => res.body.error === undefined)
-            .end(done);
-    });
+    // after(done => {
+    //     supertest.agent(app)
+    //         .delete('/users/' + user_name)
+    //         .expect(res => res.body.error === undefined)
+    //         .end(done);
+    // });
 
     it('should authenticate the user with the correct password', done => {
         supertest.agent(app)
             .post('/sessions')
             .send({
-                email: email,
+                user_name: user_name,
                 password: password
             })
             .expect('Content-Type', /json/)
             .expect(200)
             .expect(res => {
                 expect(res.body.error).to.be.undefined;
-                expect(res.body.data.email).to.equal(email);
+                expect(res.body.data.user_name).to.equal(user_name);
             })
             .end(done);
     });
@@ -52,7 +51,7 @@ describe('POST /sessions', () => {
         supertest.agent(app)
             .post('/sessions')
             .send({
-                email: email,
+                user_name: user_name,
                 password: password
             })
             .expect('Content-Type', /json/)
@@ -68,7 +67,7 @@ describe('POST /sessions', () => {
         supertest.agent(app)
             .post('/sessions')
             .send({
-                email: email,
+                user_name: user_name,
                 password: password + "1"
             })
             .expect('Content-Type', /json/)
@@ -83,7 +82,7 @@ describe('POST /sessions', () => {
         supertest.agent(app)
             .post('/sessions')
             .send({
-                email: email,
+                user_name: user_name,
                 password: password + '1'
             })
             .expect('Content-Type', /json/)

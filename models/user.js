@@ -95,8 +95,8 @@ userSchema.query.byUserName = function(userName){
 //     this.last_name = v.substr(v.indexOf(' ')+1);
 // })
 
-userSchema.statics.authenticate = function (email, password, callback) {
-    this.findOne({ email: email }, function (err, user) {
+userSchema.statics.authenticate = function (user_name, password, callback) {
+    this.findOne({ user_name: user_name }, function (err, user) {
         if (err) {
           return callback(err)
         } else if (!user) {

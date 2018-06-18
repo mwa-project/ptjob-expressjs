@@ -28,6 +28,10 @@ router.get('/', function (req, res, next) {
 
 /* POST new user */
 router.post('/', function (req, res, next) {
+
+  res.json(req.body);
+  return;
+
   var carl = new User({
     first_name: req.body.first_name,
     last_name: req.body.last_name,

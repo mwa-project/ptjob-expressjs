@@ -6,7 +6,7 @@ var jobPostSchema = new mongoose.Schema({
     , location: {state: String
         , city: String
         , zipcode: String
-        , type: String
+        , type:  { type: String }
         , coordinates:[Number, Number]}
     , requirements: [String]
     , period: {start_date: Date, end_date: Date}
@@ -22,4 +22,4 @@ var jobPostSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('JobPost', jobPostSchema);
+module.exports = mongoose.model('jobs', jobPostSchema);

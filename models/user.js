@@ -15,9 +15,10 @@ var userSchema = new mongoose.Schema({
     , location: { state: String
         , city: String
         , zipcode: String
-        , type: String
-        , coordinates:[Number, Number]}
-       // , coordinates:{type: [Number, Number]}} //titin: it can also work , I think
+        , type: { type: String }
+         , coordinates:[Number, Number]}
+        //, coordinates:{type: [Number, Number]}
+    //} //titin: it can also work , I think
     , educations: [{school_name: String
         , start_date:Date
         , end_date: Date

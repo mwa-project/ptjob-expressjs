@@ -26,12 +26,12 @@ describe('test/sessions.test.js', () => {
             .end(done);
     });
 
-    // after(done => {
-    //     supertest.agent(app)
-    //         .delete('/users/' + user_name)
-    //         .expect(res => res.body.error === undefined)
-    //         .end(done);
-    // });
+    after(done => {
+        supertest.agent(app)
+            .delete('/users/' + user_name)
+            .expect(res => res.body.error === undefined)
+            .end(done);
+    });
 
     it('should authenticate the user with the correct password', done => {
         supertest.agent(app)

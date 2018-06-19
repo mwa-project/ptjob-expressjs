@@ -119,6 +119,7 @@ userSchema.methods.generateToken = () => {
     // Signing a token with 1 hour of expiration
     const secret = 'mwa';
     return jwt.sign({
+        _id: this._id,
         user_name: this.user_name,
         first_name: this.first_name,
         last_name: this.last_name,

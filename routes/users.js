@@ -59,7 +59,25 @@ router.post('/', function (req, res, next) {
 
   });
 });
+router.put('/', (req,res,next) => {
+  console.log('HALO');
+  console.log(req.body.educations);
+  User.findOneAndUpdate({user_name: req.body.user_name}
+    , {$set: {educations: req.body.educations
+      // [{
+      // school_name:req.body.school_name,//"University of Indonesia", 
+      // degree :req.body.degree,//"Bachelor",
+      // field_study:req.body.field_study,//"Computer Science", 
+      // start_year:req.body.start_year,//2003,
+      // end_year:req.body.end_year,//2007,
+      // description: req.bodydescription//."test"
+      
+      // }] 
+    } }
+    , (err, user)=> {
 
+  });
+});
 router.delete('/:username', (req, res, next) => {
   User.findOneAndRemove({ user_name: req.params.username }, (err) => {
     if (err) {

@@ -22,6 +22,7 @@ router.get('/:id', function (req, res, next) {
 
 /* POST new job post */
 router.post('/', function (req, res, next) {
+  console.log('HALO')
   var jobPost = new JobPost({
     //job post data from req body here
     category: req.body.category
@@ -29,7 +30,7 @@ router.post('/', function (req, res, next) {
     , location: {state: req.body.state
         , city: req.body.city
         , zipcode: req.body.zipcode
-        , type: 'Points'
+        , type: 'Point'
         , coordinates:[req.body.longitude, req.body.latitude]}
     , requirements: req.body.requirements //still not sure the syntax
     , period: {start_date: req.body.period_start_date, end_date: req.body.period_end_date}

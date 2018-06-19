@@ -59,11 +59,12 @@ router.post('/', function (req, res, next) {
 
   });
 });
-router.put('/', (req,res,next) => {
+router.patch('/', (req,res,next) => {
   console.log('HALO');
   console.log(req.body.educations);
   User.findOneAndUpdate({user_name: req.body.user_name}
-    , {$set: {educations: req.body.educations
+    , {$set: {experiences: req.body.experiences
+      , educations: req.body.educations
       // [{
       // school_name:req.body.school_name,//"University of Indonesia", 
       // degree :req.body.degree,//"Bachelor",

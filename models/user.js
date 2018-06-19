@@ -19,12 +19,26 @@ var userSchema = new mongoose.Schema({
         //  , coordinates:[Number, Number]}
         , coordinates: { type: Array, 'default': [0, 0] } }
     //} //titin: it can also work , I think
+    , experiences: [{position:String
+        ,  company_name:String
+        , from_month:Number
+        , from_year:Number
+        , to_month:Number
+        , to_year:Number
+        , company_address: String
+        , description:String}]
     , educations: [{school_name: String
-        , start_date:Date
-        , end_date: Date
-        , city: String}]
+        , degree: String
+	    , field_study: String
+       	, start_year:Number
+        , end_year: Number
+        , description: String}]
+    , skills: [{title:String
+        , description:String}]
     , hobbies: [String]
-    , achievements:[String]
+    , accomplishments: [{title:String
+        , description:String }]
+    // , achievements:[String]
     , ratings: [{job_id: mongoose.Schema.Types.ObjectId
         , job_name: String
         , rating_type: Boolean

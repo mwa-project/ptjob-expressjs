@@ -22,4 +22,11 @@ var jobPostSchema = new mongoose.Schema({
 
 });
 
+//run functions before saving:
+jobPostSchema.pre('save', function(next){
+        let currentDate = new Date();
+        this.updated_at = currentDate;
+        if(!this.created_at)this.created_at = currentDate;
+});
+
 module.exports = mongoose.model('jobs', jobPostSchema);

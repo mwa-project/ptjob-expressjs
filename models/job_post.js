@@ -11,6 +11,7 @@ var jobPostSchema = new mongoose.Schema({
     , requirements: [String]
     , period: {start_date: Date, end_date: Date}
     , salary_range: {from: Number, to: Number}
+    , status: String // to make our life easier
     , created_at: Date
     , updated_at: Date
     , deleted_at: Date

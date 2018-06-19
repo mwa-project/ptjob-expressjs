@@ -9,10 +9,12 @@ router.get('/new', (req, res, next) => {
 
 // POST   /session authenticates credentials against database
 router.post('/', (req, res, next) => {
-    const user_name = req.body.user_name;
+    const userName = req.body.userName;
     const password = req.body.password;
-    // console.log(user_name + ": " + password);
-    User.authenticate(user_name, password, (err, user) => {
+    console.log(userName + ": " + password);
+    User.authenticate(userName, password, (err, user) => {
+        // console.log(err);
+        // console.log(user);
         if (err) {
             return res.json({
                 "error": err

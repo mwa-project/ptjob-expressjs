@@ -5,7 +5,7 @@ var expect = chai.expect;
 
 describe('test/users.test.js', () => {
 
-    const user_name = 'carlyang1845';
+    const user_name = "carl" + Math.floor(Math.random() * 999999999) + 1;
     const password = '123456';
     let token;
 
@@ -33,10 +33,10 @@ describe('test/users.test.js', () => {
         .expect('Content-Type', /json/)
         .expect(200)
         .expect(res => {
-            // console.log(res.body.token.length);
+            // console.log(res);
             expect(res.body.token).to.have.lengthOf(128);
             token = res.body.token;
-            console.log('got the token for user! -> ' + token)
+            // console.log('got the token for user! -> ' + token)
         })
         .end(done);
     });

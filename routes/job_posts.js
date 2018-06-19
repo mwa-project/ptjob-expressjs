@@ -20,8 +20,19 @@ router.get('/:id', function (req, res, next) {
   });
 });
 
+/* GET job posts listing. */
+router.post('/:job_id', function (req, res, next) {
+  JobPost.findById(req.params['id'], (err, jobPost) => {
+    res.json({
+      "data": jobPost
+    });
+  });
+});
+
+
 /* POST new job post */
 router.post('/', function (req, res, next) {
+  console.log('HALO')
   var jobPost = new JobPost({
     //job post data from req body here
     category: req.body.category
@@ -29,14 +40,14 @@ router.post('/', function (req, res, next) {
     , location: {state: req.body.state
         , city: req.body.city
         , zipcode: req.body.zipcode
-        , type: 'Points'
+        , type: 'Point'
         , coordinates:[req.body.longitude, req.body.latitude]}
     , requirements: req.body.requirements //still not sure the syntax
-    , period: {start_date: req.body.start_date, end_date: req.body.end_date}
-    , salary_range: {from: req.body.salary_from, to: req.body.salary_to}
+    , period: {start_date: req.body.period_start_date, end_date: req.body.period_end_date}
+    , salary_range: {from: req.body.salary_range_from, to: req.body.salary_range_to}
     , created_at: new Date()
     , updated_at: new Date()
-    , deleted_at: new Date()
+    // , deleted_at: new Date()  // if not marked as deleted , property deleted_at does not exist
     , created_by: {user_id: req.body.created_by, full_name: req.body.full_name}
 
   });

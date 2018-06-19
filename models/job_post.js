@@ -11,6 +11,7 @@ var jobPostSchema = new mongoose.Schema({
     , requirements: [String]
     , period: {start_date: Date, end_date: Date}
     , salary_range: {from: Number, to: Number}
+    , status: String // to make our life easier
     , created_at: Date
     , updated_at: Date
     , deleted_at: Date
@@ -20,6 +21,13 @@ var jobPostSchema = new mongoose.Schema({
         , submission_date: Date
         , status: String}]
 
+});
+
+//run functions before saving:
+jobPostSchema.pre('save', function(next){
+        let currentDate = new Date();
+        this.updated_at = currentDate;
+        if(!this.created_at)this.created_at = currentDate;
 });
 
 module.exports = mongoose.model('jobs', jobPostSchema);

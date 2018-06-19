@@ -128,6 +128,28 @@ router.delete('/:id', (req, res, next) => {
   });
 });
 
+router.patch('/:id/status/:status', (req, res, next) => {
+  let job_id = req.params.id;
+  let new_status = req.params.status;
+  JobPost.findOneAndUpdate(
+    { _id: job_id },
+    { status: new_status },
+    (err, doc) => {
+      if (err) return handleError(err);
+      console.log('update Job success')
+      // res.json({ "data": 'success' });
+    }
+  );
+  User.findOneAndUpdate(
+    { "job_applications.job_id": job_id },
+    { "job_applications.$.status": new_status},
+    (err, doc) => {
+      if (err) return handleError(err);
+      console.log('update User success')
+      res.json({ "data": 'success' });
+    }
+  );
+});
 
 
 module.exports = router;

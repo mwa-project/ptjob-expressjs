@@ -101,14 +101,14 @@ userSchema.query.byUserName = function(userName){
 }
 
 //virtuals:
-// userSchema.virtual('fullName')
-// .get(function(){
-//     return this.first_name + ' ' + this.last_name;
-// })
-// .set(function(v){
-//     this.first_name = v.substr(0, v.indexOf(' '));
-//     this.last_name = v.substr(v.indexOf(' ')+1);
-// })
+userSchema.virtual('full_name')
+.get(function(){
+    return this.first_name + ' ' + this.last_name;
+})
+.set(function(v){
+    this.first_name = v.substr(0, v.indexOf(' '));
+    this.last_name = v.substr(v.indexOf(' ')+1);
+})
 
 userSchema.statics.authenticate = function (user_name, password, callback) {
     this.findOne({ user_name: user_name }, function (err, user) {

@@ -31,6 +31,8 @@ router.get('/:search', function (req, res, next) {
   )
     .sort({ score: { $meta: 'textScore' } })
     .exec(function (err, jobPosts) {
+      if(jobPosts.length == 0)
+      return next();
       res.json({
         "data": jobPosts
       });

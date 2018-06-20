@@ -16,8 +16,7 @@ router.get('/:long/:lat/:dist', function (req, res, next) {
       }
      }
     }
-  )
-    .exec(function (err, jobPosts) {
+  ).exec(function (err, jobPosts) {
       res.json({
         "data": jobPosts
       });

@@ -23,11 +23,14 @@ var jobPostSchema = new mongoose.Schema({
 
 });
 
+jobPostSchema.index({category: 'text', description : 'text' });
+jobPostSchema.index({location : '2dsphere' });
 //run functions before saving:
 jobPostSchema.pre('save', function(next){
         let currentDate = new Date();
         this.updated_at = currentDate;
         if(!this.created_at)this.created_at = currentDate;
+        next();
 });
 
 module.exports = mongoose.model('jobs', jobPostSchema);

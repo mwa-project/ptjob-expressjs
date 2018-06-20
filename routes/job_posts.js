@@ -3,6 +3,41 @@ const router = express.Router();
 const JobPost = require('../models/job_post');
 const User = require('../models/user');
 
+
+router.get('/:long/:lat/:dist', function (req, res, next) {
+  JobPost.find( {
+    location: {
+      $near: {
+       $maxDistance: req.params['dist'],
+       $geometry: {
+        type: "point",
+        coordinates: [req.params['long'], req.params['lat']]
+       }
+      }
+     }
+    }
+  )
+    .exec(function (err, jobPosts) {
+      res.json({
+        "data": jobPosts
+      });
+    });
+});
+
+/* GET job posts listing. */
+router.get('/:search', function (req, res, next) {
+  JobPost.find(
+    { $text: { $search: req.params['search'] } },
+    { score: { $meta: "textScore" } }
+  )
+    .sort({ score: { $meta: 'textScore' } })
+    .exec(function (err, jobPosts) {
+      res.json({
+        "data": jobPosts
+      });
+    });
+});
+
 /* GET job posts listing. */
 router.get('/', function (req, res, next) {
   JobPost.find({}, (err, jobPosts) => {
@@ -44,7 +79,7 @@ router.patch('/:job_id', function (req, res, next) {
           user_id: user_id,
           full_name: full_name,
           submission_date: submission_date,
-          status : status
+          status: status
         }
       }
     }, x => {
@@ -60,8 +95,8 @@ router.patch('/:job_id', function (req, res, next) {
           posted_date: posted_date,
           applied_date: submission_date,
           status: status,
-          start_date : start_date,
-          end_date : end_date,
+          start_date: start_date,
+          end_date: end_date,
         }
       }
     }, x => {

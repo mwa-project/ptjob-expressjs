@@ -2,9 +2,19 @@ const express = require('express');
 const router = express.Router();
 const JobPost = require('../models/job_post');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 
 router.get('/:long/:lat/:dist', function (req, res, next) {
+  // let token = req.headers['x-access-token'];
+  // if(!token)
+  // console.log("no-token");
+
+  // jwt.verify(token, "mwa", function(err, decoded) { 
+  //   console.log(err);
+  // });
+  // console.log(token);
+
   JobPost.find( {
     location: {
       $near: {

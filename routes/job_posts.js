@@ -66,6 +66,54 @@ router.get('/user/:id', (req, res, next) => {
   });
 });
 
+//Employer give rating to employee that work on particular job
+router.patch('/:job_id/update_rating', (req, res, next) => {
+  console.log('req.body');
+  console.log(req.body);
+  let job_id = req.body.job_id;
+  let job_name = req.body.job_name;
+  let rating_type = req.body.rating_type;
+  let rating_value = req.body.rating_value;
+  let comment = req.body.comment;
+  let dataUpdate = {'job_id': job_id, 
+  'job_name': job_name, 
+  'rating_type': rating_type, 
+  'rating_value': rating_value,
+  'comment': comment
+  
+  };
+
+  //first get the employee ID:
+  JobPost.findOne({$and: [{_id:job_id},{'applicants.status': 'successful'} ]}, (err, data) => {
+
+    //employer ID
+    let employee_id = data.applicants[0].user_id;
+    //update rating:
+    User.update({_id: employee_id}, {$push: {ratings:dataUpdate }}, (err) => {
+      if(err) console.log(err);
+    }
+    );
+    res.json({
+      "data": data
+    });
+  });
+  
+});
+
+// router.get('/', function (req, res, next) { //update_rating/
+//   console.log('req.body');
+//   console.log(req.body);
+//   let job_id = req.body.job_id;
+//   let job_name = req.body.job_name;
+//   let rating_type = req.body.rating_type;
+//   let rating_value = req.body.rating_value;
+//   let comment = req.body.comment;
+
+//   //first find user ID of employee that work on that job
+
+
+// });
+
 /* Patch job posts listing. */
 router.patch('/:job_id', function (req, res, next) {
 

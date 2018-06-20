@@ -41,7 +41,7 @@ var userSchema = new mongoose.Schema({
     // , achievements:[String]
     , ratings: [{job_id: mongoose.Schema.Types.ObjectId
         , job_name: String
-        , rating_type: Boolean
+        , rating_type: Number
         , rating_value: Number
         , comment: String}]
     , job_applications: [{job_id: mongoose.Schema.Types.ObjectId

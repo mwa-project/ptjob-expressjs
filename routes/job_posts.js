@@ -186,7 +186,7 @@ router.post('/', function (req, res, next) {
       state: req.body.state
       , city: req.body.city
       , zipcode: req.body.zipcode
-      , type: 'point'
+      , type: 'Point'
       , coordinates: [req.body.longitude, req.body.latitude]
     }
     , requirements: req.body.requirements //still not sure the syntax
